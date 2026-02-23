@@ -14,7 +14,7 @@ export default function Navbar({
     onNavigate,
 }: NavbarLinks) {
     return (
-        <nav className="flex flex-col bg-stone-200 text-stone-700 min-h-screen w-50 dark:bg-stone-500 dark:text-stone-200">
+        <nav className="flex flex-col bg-stone-200 text-stone-700 min-h-screen w-52 dark:bg-stone-500 dark:text-stone-200 fixed">
             <div className="flex flex-col p-4 gap-4 text-md items-center">
                 <img src="/book-cover.png" alt="Book Cover" width="100" />
                 <h1 className="text-3xl text-stone-700 dark:text-stone-200">

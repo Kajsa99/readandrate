@@ -1,10 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type User = {
+    id: number;
+    name: string;
+    email: string | null;
+};
 
 export default function Bookform() {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [rating, setRating] = useState("");
     const [comment, setComment] = useState("");
+    const [selectedUser, setSelectedUser] = useState("");
+    const [users, setUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        const loadUsers = async () => {
+            try {
+                const res = await fetch("http://localhost:3000/users");
+                if (res.ok) {
+                    const data: User[] = await res.json();
+                    setUsers(data);
+                }
+            } catch (err) {
+                console.error("Error loading users:", err);
+            }
+        };
+        loadUsers();
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,12 +40,14 @@ export default function Bookform() {
                     aurthor: author,
                     rating: Number(rating),
                     comment,
+                    user: selectedUser || null,
                 }),
             });
             setTitle("");
             setAuthor("");
             setRating("");
             setComment("");
+            setSelectedUser("");
             alert("Review added!");
         } catch (err) {
             console.error("Error adding book:", err);
@@ -80,6 +105,21 @@ export default function Bookform() {
                         onChange={(e) => setComment(e.target.value)}
                         required
                     ></textarea>
+                </div>
+                <div>
+                    <label className="block mb-1">User (optional):</label>
+                    <select
+                        className="w-full p-2  bg-stone-700 rounded text-stone-100"
+                        value={selectedUser}
+                        onChange={(e) => setSelectedUser(e.target.value)}
+                    >
+                        <option value="">Select user (optional)</option>
+                        {users.map((user) => (
+                            <option key={user.id} value={user.name}>
+                                {user.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <button
                     type="submit"

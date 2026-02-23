@@ -42,10 +42,10 @@ app.get("/books", async (_request, response) => {
 
 app.post("/books", async (request, response) => {
     try {
-        const { title, aurthor, rating, comment } = request.body;
+        const { title, aurthor, rating, comment, user } = request.body;
         await database.query(
-            "INSERT INTO books (title, aurthor, rating, comment) VALUES (?, ?, ?, ?)",
-            [title, aurthor, rating, comment],
+            "INSERT INTO books (title, aurthor, rating, comment, user) VALUES (?, ?, ?, ?, ?)",
+            [title, aurthor, rating, comment, user || null],
         );
         response.status(201).send({ message: "Book added" });
     } catch (err) {
