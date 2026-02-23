@@ -1,14 +1,18 @@
 import { readFile } from "fs/promises";
 import mysql from "mysql2/promise";
+import { dbConfig } from "./database.ts";
 
 async function run() {
     const sqlPath = new URL("./sql/seed.sql", import.meta.url);
     const sql = await readFile(sqlPath, "utf8");
 
+    // Use the same host/port/user/password as the app, but omit `database`
+    // so that seed.sql can CREATE DATABASE + USE it on first run.
     const connection = await mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "secret",
+        host: dbConfig.host,
+        port: dbConfig.port,
+        user: dbConfig.user,
+        password: dbConfig.password,
         multipleStatements: true,
     });
 

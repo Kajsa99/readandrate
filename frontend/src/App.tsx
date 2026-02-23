@@ -23,7 +23,7 @@ function App() {
         <>
             <div className="min-h-screen flex">
                 <Navbar onNavigate={(href) => setRoute(href as Route)} />
-                <main className="flex-1 p-6 bg-neutral-800 text-neutral-100">
+                <main className="flex-1 p-6 bg-neutral-100 text-neutral-700 dark:bg-stone-900 dark:text-neutral-300">
                     {renderRoute()}
                 </main>
             </div>

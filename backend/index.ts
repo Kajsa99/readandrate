@@ -20,6 +20,16 @@ app.get("/", (_request, response) => {
     response.send("Hello Babygirl!");
 });
 
+app.get("/health", async (_request, response) => {
+    try {
+        await database.query("SELECT 1");
+        response.status(200).send({ status: "ok" });
+    } catch (err) {
+        console.error("Database health check failed:", err);
+        response.status(500).send({ status: "error" });
+    }
+});
+
 app.get("/books", async (_request, response) => {
     try {
         const [results] = await database.query<Book[]>("SELECT * FROM books");
@@ -27,6 +37,20 @@ app.get("/books", async (_request, response) => {
     } catch (err) {
         console.error("Error fetching books:", err);
         response.status(500).send({ error: "Failed to fetch books" });
+    }
+});
+
+app.post("/books", async (request, response) => {
+    try {
+        const { title, aurthor, rating, comment } = request.body;
+        await database.query(
+            "INSERT INTO books (title, aurthor, rating, comment) VALUES (?, ?, ?, ?)",
+            [title, aurthor, rating, comment],
+        );
+        response.status(201).send({ message: "Book added" });
+    } catch (err) {
+        console.error("Error adding book:", err);
+        response.status(500).send({ error: "Failed to add book" });
     }
 });
 
@@ -43,6 +67,20 @@ app.get("/users", async (_request, response) => {
     } catch (err) {
         console.error("Error fetching users:", err);
         response.status(500).send({ error: "Failed to fetch users" });
+    }
+});
+
+app.post("/users", async (request, response) => {
+    try {
+        const { name, email } = request.body;
+        await database.query("INSERT INTO users (name, email) VALUES (?, ?)", [
+            name,
+            email || null,
+        ]);
+        response.status(201).send({ message: "User added" });
+    } catch (err) {
+        console.error("Error adding user:", err);
+        response.status(500).send({ error: "Failed to add user" });
     }
 });
 
