@@ -1,34 +1,22 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar";
-import HomePage from "./pages/home";
-import BookPage from "./pages/books";
-import UserPage from "./pages/user";
+import Homepage from "./pages/home";
+import Books from "./pages/books";
+import Users from "./pages/user";
 
-type Route = "/" | "/books" | "/user";
-
-function App() {
-    const [route, setRoute] = useState<Route>("/");
-
-    function renderRoute() {
-        switch (route) {
-            case "/":
-                return <HomePage />;
-            case "/books":
-                return <BookPage />;
-            case "/user":
-                return <UserPage />;
-        }
-    }
+export default function App() {
     return (
-        <>
-            <div className="min-h-screen flex">
-                <Navbar onNavigate={(href) => setRoute(href as Route)} />
-                <main className="flex-1 p-6 ml-52 bg-neutral-100 text-neutral-700 dark:bg-stone-900 dark:text-neutral-300 h-screen overflow-auto">
-                    {renderRoute()}
+        <BrowserRouter>
+            <div className="flex">
+                <Navbar />
+                <main className="ml-52 flex-1">
+                    <Routes>
+                        <Route path="/" element={<Homepage />} />
+                        <Route path="/books" element={<Books />} />
+                        <Route path="/user" element={<Users />} />
+                    </Routes>
                 </main>
             </div>
-        </>
+        </BrowserRouter>
     );
 }
-
-export default App;

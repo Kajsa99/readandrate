@@ -1,17 +1,17 @@
+import { Link } from "react-router-dom";
+
 type NavItem = { label: string; href: string };
 
 interface NavbarLinks {
     items?: NavItem[];
-    onNavigate?: (href: string) => void;
 }
 
 export default function Navbar({
     items = [
         { label: "Home", href: "/" },
         { label: "Books", href: "/books" },
-        { label: "User", href: "/user" },
+        { label: "Users", href: "/user" },
     ],
-    onNavigate,
 }: NavbarLinks) {
     return (
         <nav className="flex flex-col bg-stone-200 text-stone-700 min-h-screen w-52 dark:bg-stone-500 dark:text-stone-200 fixed">
@@ -21,19 +21,13 @@ export default function Navbar({
                     Read&Rate
                 </h1>
                 {items.map((item) => (
-                    <a
+                    <Link
                         key={item.href}
-                        href={item.href}
-                        onClick={(e) => {
-                            if (onNavigate) {
-                                e.preventDefault();
-                                onNavigate(item.href);
-                            }
-                        }}
+                        to={item.href}
                         className="block w-full px-3 py-2 rounded hover:bg-stone-200 dark:hover:bg-stone-600 text-center"
                     >
                         {item.label}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </nav>

@@ -7,6 +7,7 @@ interface UserFormProps {
 export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const handleAddUser = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -19,6 +20,8 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
                 });
                 setName("");
                 setEmail("");
+                setShowSuccess(true);
+                setTimeout(() => setShowSuccess(false), 3000);
                 onUserAdded();
             } catch (err) {
                 console.error("Error adding user:", err);
@@ -27,31 +30,44 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
     };
 
     return (
-        <div className="mb-6">
-            <h2 className="text-lg mb-3">Add New User</h2>
+        <div className="mb-6 bg-stone-100 p-6 rounded-lg">
+            <h2 className="text-lg mb-3 text-stone-900 font-semibold">
+                Add New User
+            </h2>
+            {showSuccess && (
+                <div
+                    className="mb-4 p-3 bg-green-100 text-green-800 rounded border border-green-300"
+                    id="message"
+                >
+                    User added successfully!
+                </div>
+            )}
             <form
                 onSubmit={handleAddUser}
                 className="flex flex-col gap-3 max-w-md"
             >
                 <input
+                    id="name"
                     type="text"
                     placeholder="User name"
-                    className="w-full p-2 bg-stone-700 rounded text-stone-100"
+                    className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
                 <input
+                    id="email"
                     type="email"
                     placeholder="Email"
-                    className="w-full p-2 bg-stone-700 rounded text-stone-100"
+                    className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
                 <button
+                    id="submit"
                     type="submit"
-                    className="bg-stone-200 text-stone-700 p-2 rounded hover:bg-green-600"
+                    className="bg-stone-700 text-white p-2 rounded hover:bg-stone-800"
                 >
                     Add User
                 </button>

@@ -55,14 +55,18 @@ export default function Bookform() {
     };
 
     return (
-        <div>
-            <h1 className="text-lg">Add a new Book Review</h1>
-            <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit}>
+        <div className="bg-stone-100 p-6 rounded-lg max-w-2xl">
+            <h1 className="text-lg font-semibold text-stone-900 mb-4">
+                Add a new Book Review
+            </h1>
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <div>
-                    <label className="block mb-1">Title:</label>
+                    <label className="block mb-1 text-stone-900 font-medium">
+                        Title:
+                    </label>
                     <input
                         type="text"
-                        className="w-full p-2  bg-stone-700 text-stone-100 rounded"
+                        className="w-full p-2 bg-white border border-stone-300 text-stone-900 rounded"
                         placeholder="Enter book title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -70,10 +74,12 @@ export default function Bookform() {
                     />
                 </div>
                 <div>
-                    <label className="block mb-1">Author:</label>
+                    <label className="block mb-1 text-stone-900 font-medium">
+                        Author:
+                    </label>
                     <input
                         type="text"
-                        className="w-full p-2  bg-stone-700 rounded text-stone-100 "
+                        className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
                         placeholder="Enter author's name"
                         value={author}
                         onChange={(e) => setAuthor(e.target.value)}
@@ -81,9 +87,11 @@ export default function Bookform() {
                     />
                 </div>
                 <div>
-                    <label className="block mb-1">Rating:</label>
+                    <label className="block mb-1 text-stone-900 font-medium">
+                        Rating:
+                    </label>
                     <select
-                        className="w-full p-2  bg-stone-700 rounded text-stone-100"
+                        className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
                         required
@@ -97,9 +105,11 @@ export default function Bookform() {
                     </select>
                 </div>
                 <div>
-                    <label className="block mb-1">Comment:</label>
+                    <label className="block mb-1 text-stone-900 font-medium">
+                        Comment:
+                    </label>
                     <textarea
-                        className="w-full p-2 bg-stone-700 rounded text-stone-100 "
+                        className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
                         placeholder="Write any additional comments here"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
@@ -107,9 +117,11 @@ export default function Bookform() {
                     ></textarea>
                 </div>
                 <div>
-                    <label className="block mb-1">User (optional):</label>
+                    <label className="block mb-1 text-stone-900 font-medium">
+                        User (optional):
+                    </label>
                     <select
-                        className="w-full p-2  bg-stone-700 rounded text-stone-100"
+                        className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
                         value={selectedUser}
                         onChange={(e) => setSelectedUser(e.target.value)}
                     >
@@ -123,7 +135,7 @@ export default function Bookform() {
                 </div>
                 <button
                     type="submit"
-                    className="bg-stone-200 text-stone-700 p-2 rounded hover:bg-green-600"
+                    className="bg-stone-700 text-white p-2 rounded hover:bg-stone-800"
                 >
                     Add Review
                 </button>

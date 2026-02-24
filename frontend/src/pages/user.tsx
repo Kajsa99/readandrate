@@ -13,7 +13,6 @@ export default function Userpage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    // loading all users and refreshing when adding new
     const loadUsers = async () => {
         try {
             setLoading(true);
@@ -35,11 +34,13 @@ export default function Userpage() {
 
     return (
         <>
-            <div className="flex flex-col items-center">
-                <h1 className="text-lg mb-4">Users</h1>
+            <div className="flex flex-col items-center p-6">
+                <h1 className="text-2xl font-bold text-stone-900 mb-6">
+                    Users
+                </h1>
                 <UserForm onUserAdded={loadUsers} />
-                {loading && <p className="text-stone-400">Loading…</p>}
-                {error && <p className="text-red-400">Error: {error}</p>}
+                {loading && <p className="text-stone-500">Loading…</p>}
+                {error && <p className="text-red-600">Error: {error}</p>}
                 {!loading && !error && <UsersList users={users} />}
             </div>
         </>
