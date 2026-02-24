@@ -9,6 +9,7 @@ interface NavbarLinks {
 export default function Navbar({
     items = [
         { label: "Dashboard", href: "/" },
+        { label: "Popular Books", href: "/popular" },
         { label: "Books", href: "/books" },
         { label: "Users", href: "/user" },
     ],

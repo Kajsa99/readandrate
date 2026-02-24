@@ -3,6 +3,7 @@ import Navbar from "./components/navbar";
 import Homepage from "./pages/home";
 import Books from "./pages/books";
 import Users from "./pages/user";
+import Popularpage from "./pages/popular";
 
 export default function App() {
     return (
@@ -14,6 +15,7 @@ export default function App() {
                         <Route path="/" element={<Homepage />} />
                         <Route path="/books" element={<Books />} />
                         <Route path="/user" element={<Users />} />
+                        <Route path="/popular" element={<Popularpage />} />
                     </Routes>
                 </main>
             </div>
