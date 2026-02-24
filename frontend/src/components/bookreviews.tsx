@@ -38,7 +38,7 @@ export default function Bookreviews() {
     }, []);
 
     return (
-        <div className="w-full mx-auto my-6 bg-stone-100 rounded-2xl p-6">
+        <div className="w-full mx-auto my-6">
             <h2 className="text-xl font-semibold mb-4 text-stone-900">
                 Book Reviews
             </h2>
@@ -51,7 +51,7 @@ export default function Bookreviews() {
             {!loading && !error && books.length === 0 && (
                 <p className="text-stone-500">No reviews yet.</p>
             )}
-            <ul className="grid grid-cols-3 gap-8 auto-rows-max max-h-96 overflow-y-auto pr-2">
+            <ul className="grid grid-cols-3 gap-8 auto-rows-max max-h-96 pr-2">
                 {books.map((b) => (
                     <li
                         key={b.id}
@@ -60,26 +60,32 @@ export default function Bookreviews() {
                         <div>
                             <div className="flex items-baseline justify-between mb-2">
                                 <div className="flex-1">
-                                    <p className="font-lg text-stone-900 text-sm line-clamp-2">
+                                    <p className="text-stone-900 text-lg">
                                         {b.title}
                                     </p>
                                     <p className="text-md text-stone-600 line-clamp-1">
-                                        by {b.aurthor}
+                                        written by {b.aurthor}
                                     </p>
                                 </div>
-                                <p className="text-md text-stone-700">Rating</p>
-                                <span className="text-md bg-stone-200 text-stone-900 px-2 py-1 rounded ml-2">
-                                    {b.rating}/5
-                                </span>
                             </div>
                             {b.comment && (
-                                <p className="text-md text-stone-700 mt-2 overflow-auto max-h-24">
+                                <p className="text-md text-stone-700 mt-2 overflow-auto max-h-18">
                                     {b.comment}
                                 </p>
                             )}
-                            <p className="text-sm text-stone-500 mt-2">
-                                {b.user ? `- ${b.user}` : ""}
-                            </p>
+                            <div className="flex items-center justify-between mt-4 gap-2">
+                                <p className="text-sm text-stone-500">
+                                    {b.user ? `- ${b.user}` : ""}
+                                </p>
+                                <div className="flex items-center gap-1">
+                                    <p className="text-sm text-stone-700">
+                                        Rating:
+                                    </p>
+                                    <span className="text-sm bg-amber-300 text-stone-700 px-2 py-1 rounded">
+                                        {b.rating}/5
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 ))}
