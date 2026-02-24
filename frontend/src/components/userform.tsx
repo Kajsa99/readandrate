@@ -42,7 +42,10 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
     };
 
     return (
-        <div className="mb-6 bg-stone-100 p-6 rounded-lg">
+        <div
+            className="border border-stone-300 p-6 rounded-lg shadow-md w-full max-w-md h-fit"
+            id="user-form"
+        >
             <h2 className="text-lg mb-3 text-stone-900 font-semibold">
                 Add New User
             </h2>
@@ -87,7 +90,7 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
                 <button
                     id="submit"
                     type="submit"
-                    className="bg-stone-700 text-white p-2 rounded hover:bg-stone-800"
+                    className="bg-stone-700 max-h-10 text-white mx-10 m-4 p-2 rounded-xl hover:bg-amber-400 hover:text-white transform-3d hover:-translate-y-0.5 transition-all duration-200"
                 >
                     Add User
                 </button>

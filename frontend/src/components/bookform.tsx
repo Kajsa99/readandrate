@@ -55,7 +55,10 @@ export default function Bookform() {
     };
 
     return (
-        <div className="bg-stone-100 p-6 rounded-lg max-w-2xl">
+        <div
+            className="border border-stone-300 p-6 rounded-lg min-w-xl shadow-md"
+            id="book-form"
+        >
             <h1 className="text-lg font-semibold text-stone-900 mb-4">
                 Add a new Book Review
             </h1>
@@ -86,24 +89,7 @@ export default function Bookform() {
                         required
                     />
                 </div>
-                <div>
-                    <label className="block mb-1 text-stone-900 font-medium">
-                        Rating:
-                    </label>
-                    <select
-                        className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                        required
-                    >
-                        <option value="">Select rating</option>
-                        <option value="1">1 - Poor</option>
-                        <option value="2">2 - Fair</option>
-                        <option value="3">3 - Good</option>
-                        <option value="4">4 - Very Good</option>
-                        <option value="5">5 - Excellent</option>
-                    </select>
-                </div>
+
                 <div>
                     <label className="block mb-1 text-stone-900 font-medium">
                         Comment:
@@ -116,26 +102,47 @@ export default function Bookform() {
                         required
                     ></textarea>
                 </div>
-                <div>
-                    <label className="block mb-1 text-stone-900 font-medium">
-                        User (optional):
-                    </label>
-                    <select
-                        className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
-                        value={selectedUser}
-                        onChange={(e) => setSelectedUser(e.target.value)}
-                    >
-                        <option value="">Select user (optional)</option>
-                        {users.map((user) => (
-                            <option key={user.id} value={user.name}>
-                                {user.name}
-                            </option>
-                        ))}
-                    </select>
+                <div className="flex flex-row justify-between gap-4">
+                    <div>
+                        <label className="block mb-1 text-stone-900 font-medium">
+                            Rating:
+                        </label>
+                        <select
+                            className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                            required
+                        >
+                            <option value="">Select rating</option>
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label className="block mb-1 text-stone-900 font-medium">
+                            User (optional):
+                        </label>
+                        <select
+                            className="max-w-md p-2 bg-white border border-stone-300 rounded text-stone-900"
+                            value={selectedUser}
+                            onChange={(e) => setSelectedUser(e.target.value)}
+                        >
+                            <option value="">Select user (optional)</option>
+                            {users.map((user) => (
+                                <option key={user.id} value={user.name}>
+                                    {user.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
                 <button
                     type="submit"
-                    className="bg-stone-700 text-white p-2 rounded hover:bg-stone-800"
+                    className="bg-stone-700 max-h-10 text-white mx-10 m-4 p-2 rounded-xl hover:bg-amber-400 hover:text-white transform-3d hover:-translate-y-0.5 transition-all duration-200"
                 >
                     Add Review
                 </button>

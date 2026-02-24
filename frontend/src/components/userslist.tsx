@@ -17,8 +17,8 @@ export const UsersList: React.FC<UsersListProps> = ({ users }) => {
 
     return (
         <div className="users-list-container">
-            <h2 className="text-lg font-semibold mb-4 text-stone-900">
-                Users List
+            <h2 className="text-sm font-semibold mb-4 text-stone-700">
+                Existing users
             </h2>
             <ul className="users-list">
                 {users.map((user) => (
