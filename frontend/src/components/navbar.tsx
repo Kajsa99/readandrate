@@ -8,7 +8,7 @@ interface NavbarLinks {
 
 export default function Navbar({
     items = [
-        { label: "Home", href: "/" },
+        { label: "Dashboard", href: "/" },
         { label: "Books", href: "/books" },
         { label: "Users", href: "/user" },
     ],

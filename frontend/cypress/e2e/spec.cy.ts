@@ -24,6 +24,7 @@ describe("Go to user page", function () {
     });
 });
 
+// testing user form submission
 describe("Submit user form", function () {
     it("go to user form and submit", function () {
         cy.visit("http://localhost:5173/");

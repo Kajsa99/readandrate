@@ -39,8 +39,8 @@ export default function Bookreviews() {
 
     return (
         <div className="w-full mx-auto my-6">
-            <h2 className="text-xl font-semibold mb-4 text-stone-900">
-                Book Reviews
+            <h2 className="text-md font-semibold mb-4 text-stone-700">
+                Recent Book Reviews
             </h2>
             {loading && <p className="text-stone-500">Loading…</p>}
             {error && (

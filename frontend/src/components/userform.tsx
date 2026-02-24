@@ -8,23 +8,35 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleAddUser = async (e: React.FormEvent) => {
         e.preventDefault();
         if (name && email) {
             try {
-                await fetch("http://localhost:3000/users", {
+                const response = await fetch("http://localhost:3000/users", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, email }),
                 });
+                if (!response.ok) {
+                    throw new Error("Failed to add user");
+                }
                 setName("");
                 setEmail("");
                 setShowSuccess(true);
+                setShowError(false);
                 setTimeout(() => setShowSuccess(false), 3000);
                 onUserAdded();
             } catch (err) {
                 console.error("Error adding user:", err);
+                setShowError(true);
+                setErrorMessage(
+                    err instanceof Error ? err.message : "Failed to add user",
+                );
+                setTimeout(() => setShowError(false), 3000);
+                return;
             }
         }
     };
@@ -40,6 +52,14 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
                     id="message"
                 >
                     User added successfully!
+                </div>
+            )}
+            {showError && (
+                <div
+                    className="mb-4 p-3 bg-red-100 text-red-800 rounded border border-red-300"
+                    id="error-message"
+                >
+                    {errorMessage}
                 </div>
             )}
             <form
