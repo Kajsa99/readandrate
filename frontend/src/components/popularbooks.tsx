@@ -62,16 +62,13 @@ export default function PopularBooks() {
     }
 
     return (
-        <div className="w-full mx-auto my-6">
-            <h2 className="text-md font-semibold mb-4 text-stone-700">
-                Popular Books
-            </h2>
-            <ul className="grid grid-cols-3 gap-8 auto-rows-max max-h-96 pr-2">
+        <div className="w-full mx-auto my-6 p-4">
+            <ul className="flex flex-col items-center gap-8 max-h-96 pr-2">
                 {books.map((b) => (
                     <li
                         key={b.id}
                         data-testid="book-item"
-                        className="border border-stone-300 rounded-xl p-4 bg-white flex flex-col justify-between shadow-sm"
+                        className="border border-stone-300 rounded-xl p-4 bg-white  shadow-sm w-full max-w-md"
                     >
                         <div>
                             <div className="flex items-baseline justify-between mb-2">

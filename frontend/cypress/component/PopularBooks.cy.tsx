@@ -83,6 +83,40 @@ describe("PopularBooks Component", () => {
         cy.get('[data-testid="book-item"]').eq(2).contains("4").should("exist");
     });
 
+    it("filters to Popular by default (rating >= 4)", () => {
+        cy.mount(<PopularBooks />);
+        cy.wait("@getBooks");
+
+        cy.get('[data-testid="book-item"]').should("have.length", 3);
+        cy.contains("The Great Gatsby").should("exist");
+        cy.contains("To Kill a Mockingbird").should("exist");
+        cy.contains("1984").should("exist");
+        cy.contains("Pride and Prejudice").should("not.exist");
+    });
+
+    it("filters to Average when selected (rating = 3)", () => {
+        cy.mount(<PopularBooks />);
+        cy.wait("@getBooks");
+
+        cy.get('[data-testid="filter-select"]').select("Average");
+
+        cy.get('[data-testid="book-item"]').should("have.length", 1);
+        cy.contains("Pride and Prejudice").should("exist");
+        cy.contains("1984").should("not.exist");
+    });
+
+    it("filters to Bad when selected (rating 1-2)", () => {
+        cy.mount(<PopularBooks />);
+        cy.wait("@getBooks");
+
+        cy.get('[data-testid="filter-select"]').select("Bad");
+
+        cy.get('[data-testid="book-item"]').should("have.length", 2);
+        cy.contains("The Catcher in the Rye").should("exist");
+        cy.contains("Moby Dick").should("exist");
+        cy.contains("The Great Gatsby").should("not.exist");
+    });
+
     it("shows error state on API failure", () => {
         // Mock API to return error
         cy.intercept("GET", "http://localhost:3000/books", {
