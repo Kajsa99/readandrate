@@ -16,6 +16,9 @@
 // Import commands.js using ES2015 syntax:
 import "./commands";
 
+// Import styles
+import "../../src/index.css";
+
 import { mount } from "cypress/react";
 
 // Augment the Cypress namespace to include type definitions for
