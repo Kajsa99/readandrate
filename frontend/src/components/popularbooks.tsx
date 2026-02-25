@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import StarRating from "./starrating";
 
 type Book = {
     id: number;
@@ -118,9 +119,10 @@ export default function PopularBooks() {
                                     <p className="text-sm text-stone-700">
                                         Rating:
                                     </p>
-                                    <span className="text-sm bg-amber-300 text-stone-700 px-2 py-1 rounded">
-                                        {b.rating}/5
-                                    </span>
+                                    <StarRating
+                                        rating={b.rating}
+                                        size="small"
+                                    />
                                 </div>
                             </div>
                         </div>

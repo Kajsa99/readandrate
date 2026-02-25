@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StarRating from "./starrating";
 
 type User = {
     id: number;
@@ -9,7 +10,7 @@ type User = {
 export default function Bookform() {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
-    const [rating, setRating] = useState("");
+    const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [selectedUser, setSelectedUser] = useState("");
     const [users, setUsers] = useState<User[]>([]);
@@ -38,14 +39,14 @@ export default function Bookform() {
                 body: JSON.stringify({
                     title,
                     aurthor: author,
-                    rating: Number(rating),
+                    rating: rating,
                     comment,
                     user: selectedUser || null,
                 }),
             });
             setTitle("");
             setAuthor("");
-            setRating("");
+            setRating(0);
             setComment("");
             setSelectedUser("");
             alert("Review added!");
@@ -104,19 +105,12 @@ export default function Bookform() {
                         <label className="block mb-1 text-stone-900 font-medium">
                             Rating:
                         </label>
-                        <select
-                            className="w-full p-2 bg-white border border-stone-300 rounded text-stone-900"
-                            value={rating}
-                            onChange={(e) => setRating(e.target.value)}
-                            required
-                        >
-                            <option value="">Select rating</option>
-                            <option value="1">1 - Poor</option>
-                            <option value="2">2 - Fair</option>
-                            <option value="3">3 - Good</option>
-                            <option value="4">4 - Very Good</option>
-                            <option value="5">5 - Excellent</option>
-                        </select>
+                        <StarRating
+                            rating={rating}
+                            size="medium"
+                            interactive={true}
+                            onRatingChange={setRating}
+                        />
                     </div>
 
                     <div>

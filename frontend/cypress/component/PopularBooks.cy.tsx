@@ -74,13 +74,22 @@ describe("PopularBooks Component", () => {
         cy.mount(<PopularBooks />);
         cy.wait("@getBooks");
 
-        // Check each book's rating badge shows correct value
+        // Check each book's highlighted stars match the rating
         cy.get('[data-testid="book-item"]')
-            .first()
-            .contains("5")
-            .should("exist");
-        cy.get('[data-testid="book-item"]').eq(1).contains("5").should("exist");
-        cy.get('[data-testid="book-item"]').eq(2).contains("4").should("exist");
+            .eq(0)
+            .within(() => {
+                cy.get("span.text-amber-400").should("have.length", 5);
+            });
+        cy.get('[data-testid="book-item"]')
+            .eq(1)
+            .within(() => {
+                cy.get("span.text-amber-400").should("have.length", 5);
+            });
+        cy.get('[data-testid="book-item"]')
+            .eq(2)
+            .within(() => {
+                cy.get("span.text-amber-400").should("have.length", 4);
+            });
     });
 
     it("filters to Popular by default (rating >= 4)", () => {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StarRating from "./starrating";
 
 type Book = {
     id: number;
@@ -77,14 +78,7 @@ export default function Bookreviews() {
                                 <p className="text-sm text-stone-500">
                                     {b.user ? `- ${b.user}` : ""}
                                 </p>
-                                <div className="flex items-center gap-1">
-                                    <p className="text-sm text-stone-700">
-                                        Rating:
-                                    </p>
-                                    <span className="text-sm bg-amber-300 text-stone-700 px-2 py-1 rounded">
-                                        {b.rating}/5
-                                    </span>
-                                </div>
+                                <StarRating rating={b.rating} size="small" />
                             </div>
                         </div>
                     </li>

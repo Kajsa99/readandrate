@@ -24,7 +24,7 @@ describe("Bookform Component", () => {
         cy.get('input[placeholder="Enter book title"]').should("exist");
         cy.get('input[placeholder="Enter author\'s name"]').should("exist");
         cy.get('textarea[placeholder*="additional comments"]').should("exist");
-        cy.get("select").should("have.length", 2);
+        cy.get("select").should("have.length", 1);
         cy.get("button").contains("Add Review").should("exist");
     });
 
@@ -34,8 +34,8 @@ describe("Bookform Component", () => {
         cy.get('textarea[placeholder*="additional comments"]').type(
             "First gothic horror novel I read, really like it!",
         );
-        cy.get("select").first().select("5");
-        cy.get("select").last().select("Svenne");
+        cy.contains("label", "Rating:").parent().find("span").eq(4).click();
+        cy.get("select").select("Svenne");
         cy.get("button").contains("Add Review").click();
 
         cy.wait("@addBook").its("response.statusCode").should("eq", 201);
@@ -43,9 +43,6 @@ describe("Bookform Component", () => {
 
     // checks the user dropdown shows both mock data names
     it("should populate user dropdown", () => {
-        cy.get("select")
-            .last()
-            .should("contain", "Svenne")
-            .and("contain", "Pickle");
+        cy.get("select").should("contain", "Svenne").and("contain", "Pickle");
     });
 });
