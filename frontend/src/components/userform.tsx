@@ -43,7 +43,7 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
 
     return (
         <div
-            className="border border-stone-300 p-6 rounded-lg shadow-md w-full max-w-md h-fit"
+            className="border border-stone-300 p-6 rounded-lg max-w-md shadow-md mx-auto"
             id="user-form"
         >
             <h2 className="text-lg mb-3 text-stone-900 font-semibold">
@@ -65,10 +65,7 @@ export const UserForm: React.FC<UserFormProps> = ({ onUserAdded }) => {
                     {errorMessage}
                 </div>
             )}
-            <form
-                onSubmit={handleAddUser}
-                className="flex flex-col gap-3 max-w-md"
-            >
+            <form onSubmit={handleAddUser} className="flex flex-col gap-4">
                 <input
                     id="name"
                     type="text"

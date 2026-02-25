@@ -56,7 +56,7 @@ export default function Bookform() {
 
     return (
         <div
-            className="border border-stone-300 p-6 rounded-lg min-w-xl shadow-md"
+            className="border border-stone-300 p-6 rounded-lg min-w-xl shadow-md mx-auto"
             id="book-form"
         >
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>

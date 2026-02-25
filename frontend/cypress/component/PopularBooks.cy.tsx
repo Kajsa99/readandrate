@@ -1,6 +1,6 @@
 import PopularBooks from "../../src/components/PopularBooks";
 
-// TDD for Popular books filter
+// TDD for Popular books filter, now works as filter by rating component
 describe("PopularBooks Component", () => {
     // Mock book data
     const mockBooks = [

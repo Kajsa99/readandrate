@@ -41,6 +41,7 @@ describe("Bookform Component", () => {
         cy.wait("@addBook").its("response.statusCode").should("eq", 201);
     });
 
+    // checks the user dropdown shows both mock data names
     it("should populate user dropdown", () => {
         cy.get("select")
             .last()

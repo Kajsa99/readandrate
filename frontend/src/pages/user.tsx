@@ -34,11 +34,16 @@ export default function Userpage() {
 
     return (
         <>
-            <div className="w-full mx-auto m-6 p-10">
-                <h1 className="text-2xl font-bold text-stone-900 mb-6">
-                    Users
-                </h1>
-                <div className="grid grid-cols-2 p-6 gap-6">
+            <div>
+                <div className="p-6 border-b border-stone-300 mb-6">
+                    <h1 className="text-lg font-bold text-stone-900 flex items-center">
+                        Users
+                    </h1>
+                    <p className="text-stone-600 text-sm">
+                        Manage all users here
+                    </p>
+                </div>
+                <div className="w-full max-w-2xl mx-auto px-4">
                     <UserForm onUserAdded={loadUsers} />
                     {loading && <p className="text-stone-500">Loading…</p>}
                     {error && <p className="text-red-600">Error: {error}</p>}
