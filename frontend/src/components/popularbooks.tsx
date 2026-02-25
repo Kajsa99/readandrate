@@ -11,8 +11,10 @@ type Book = {
 
 export default function PopularBooks() {
     const [books, setBooks] = useState<Book[]>([]);
+    const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [filter, setFilter] = useState<string>("Popular");
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -28,12 +30,11 @@ export default function PopularBooks() {
 
                 const allBooks = await response.json();
 
-                // Filter books with rating >= 4
-                const popularBooks = allBooks.filter(
-                    (book: Book) => book.rating >= 4,
+                const sortedBooks = allBooks.sort(
+                    (a: Book, b: Book) => b.rating - a.rating,
                 );
 
-                setBooks(popularBooks);
+                setBooks(sortedBooks);
             } catch (err) {
                 setError(
                     err instanceof Error
@@ -49,6 +50,23 @@ export default function PopularBooks() {
         fetchBooks();
     }, []);
 
+    useEffect(() => {
+        let filtered = books;
+
+        if (filter === "Popular") {
+            filtered = books.filter((book) => book.rating >= 4);
+        } else if (filter === "Average") {
+            filtered = books.filter(
+                (book) => book.rating > 2 && book.rating < 4,
+            );
+        } else if (filter === "Bad") {
+            filtered = books.filter((book) => book.rating <= 2);
+        }
+
+        const sorted = filtered.sort((a: Book, b: Book) => b.rating - a.rating);
+        setFilteredBooks(sorted);
+    }, [books, filter]);
+
     if (loading) {
         return <div className="p-4">Loading…</div>;
     }
@@ -57,26 +75,32 @@ export default function PopularBooks() {
         return <div className="p-4 text-red-600">Error: {error}</div>;
     }
 
-    if (books.length === 0) {
-        return <div className="p-4">No popular books available.</div>;
-    }
-
     return (
-        <div className="w-full mx-auto my-6 p-4">
-            <ul className="flex flex-col items-center gap-8 max-h-96 pr-2">
-                {books.map((b) => (
+        <div className="w-full mx-auto my-6">
+            <select
+                data-testid="filter-select"
+                className="mb-4 bg-stone-500 text-white px-4 py-2 rounded-md"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+            >
+                <option value="Popular">Popular</option>
+                <option value="Average">Average</option>
+                <option value="Bad">Bad</option>
+            </select>
+            <ul className="grid grid-cols-3 gap-8 auto-rows-max max-h-96 pr-2">
+                {filteredBooks.map((b) => (
                     <li
                         key={b.id}
                         data-testid="book-item"
-                        className="border border-stone-300 rounded-xl p-4 bg-white  shadow-sm w-full max-w-md"
+                        className="border border-stone-300 rounded-xl p-4 bg-white flex flex-col justify-between shadow-sm"
                     >
                         <div>
                             <div className="flex items-baseline justify-between mb-2">
                                 <div className="flex-1">
-                                    <p className="text-stone-900 text-lg">
+                                    <p className="text-stone-900 text-xl font-serif">
                                         {b.title}
                                     </p>
-                                    <p className="text-md text-stone-600 line-clamp-1">
+                                    <p className="text-sm font-serif text-stone-600 line-clamp-1">
                                         written by {b.aurthor}
                                     </p>
                                 </div>

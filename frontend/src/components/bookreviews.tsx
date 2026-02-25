@@ -60,10 +60,10 @@ export default function Bookreviews() {
                         <div>
                             <div className="flex items-baseline justify-between mb-2">
                                 <div className="flex-1">
-                                    <p className="text-stone-900 text-lg">
+                                    <p className="text-stone-900 text-xl font-serif">
                                         {b.title}
                                     </p>
-                                    <p className="text-md text-stone-600 line-clamp-1">
+                                    <p className="text-sm font-serif text-stone-600 line-clamp-1">
                                         written by {b.aurthor}
                                     </p>
                                 </div>
