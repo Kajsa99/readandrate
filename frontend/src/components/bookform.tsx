@@ -59,9 +59,6 @@ export default function Bookform() {
             className="border border-stone-300 p-6 rounded-lg min-w-xl shadow-md"
             id="book-form"
         >
-            <h1 className="text-lg font-semibold text-stone-900 mb-4">
-                Add a new Book Review
-            </h1>
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <div>
                     <label className="block mb-1 text-stone-900 font-medium">
