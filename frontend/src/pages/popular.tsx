@@ -3,7 +3,7 @@ import PopularBooks from "../components/popularbooks";
 export default function Popularpage() {
     return (
         <>
-            <div>
+            <div className="pb-96">
                 <div className="p-6 border-b border-stone-300 mb-6">
                     <h1 className="text-lg font-bold text-stone-900 flex items-center">
                         Popular Books

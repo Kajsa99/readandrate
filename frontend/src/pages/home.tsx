@@ -2,7 +2,7 @@ import Bookreviews from "../components/bookreviews";
 
 export default function Homepage() {
     return (
-        <>
+        <div className="pb-96">
             <div className="p-6 border-b border-stone-300 mb-6">
                 <h1 className="text-lg font-bold text-stone-900 flex items-center">
                     Explore Book Reviews
@@ -15,6 +15,6 @@ export default function Homepage() {
             <div className="px-10">
                 <Bookreviews />
             </div>
-        </>
+        </div>
     );
 }

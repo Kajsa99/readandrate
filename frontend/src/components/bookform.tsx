@@ -49,9 +49,9 @@ export default function Bookform() {
             setRating(0);
             setComment("");
             setSelectedUser("");
-            alert("Review added!");
+            alert("Review published!");
         } catch (err) {
-            console.error("Error adding book:", err);
+            console.error("Error publishing book:", err);
         }
     };
 
@@ -135,7 +135,7 @@ export default function Bookform() {
                     type="submit"
                     className="bg-stone-700 max-h-10 text-white mx-10 m-4 p-2 rounded-xl hover:bg-amber-400 hover:text-white transform-3d hover:-translate-y-0.5 transition-all duration-200"
                 >
-                    Add Review
+                    Publish review
                 </button>
             </form>
         </div>

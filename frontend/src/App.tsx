@@ -10,7 +10,7 @@ export default function App() {
         <BrowserRouter>
             <div className="flex">
                 <Navbar />
-                <main className="ml-52 flex-1">
+                <main className="ml-52 flex-1 min-h-screen">
                     <Routes>
                         <Route path="/" element={<Homepage />} />
                         <Route path="/books" element={<Books />} />

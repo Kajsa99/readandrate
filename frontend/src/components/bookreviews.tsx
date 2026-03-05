@@ -1,14 +1,5 @@
 import { useEffect, useState } from "react";
-import StarRating from "./starrating";
-
-type Book = {
-    id: number;
-    title: string;
-    aurthor: string;
-    rating: number;
-    comment: string | null;
-    user?: string | null;
-};
+import BookCard, { type Book } from "./bookcard";
 
 export default function Bookreviews() {
     const [books, setBooks] = useState<Book[]>([]);
@@ -54,34 +45,7 @@ export default function Bookreviews() {
             )}
             <ul className="grid grid-cols-3 gap-8 auto-rows-max max-h-96 pr-2">
                 {books.map((b) => (
-                    <li
-                        key={b.id}
-                        className="border border-stone-300 rounded-xl p-4 bg-white flex flex-col justify-between shadow-sm"
-                    >
-                        <div>
-                            <div className="flex items-baseline justify-between mb-2">
-                                <div className="flex-1">
-                                    <p className="text-stone-900 text-xl font-serif">
-                                        {b.title}
-                                    </p>
-                                    <p className="text-sm font-serif text-stone-600 line-clamp-1">
-                                        written by {b.aurthor}
-                                    </p>
-                                </div>
-                            </div>
-                            {b.comment && (
-                                <p className="text-md text-stone-700 mt-2 overflow-auto max-h-18">
-                                    {b.comment}
-                                </p>
-                            )}
-                            <div className="flex items-center justify-between mt-4 gap-2">
-                                <p className="text-sm text-stone-500">
-                                    {b.user ? `- ${b.user}` : ""}
-                                </p>
-                                <StarRating rating={b.rating} size="small" />
-                            </div>
-                        </div>
-                    </li>
+                    <BookCard key={b.id} book={b} />
                 ))}
             </ul>
         </div>
