@@ -38,7 +38,7 @@ export default function BookCard({
                     </div>
                 </div>
                 {book.comment && (
-                    <p className="text-md border border-stone-200 bg-stone-100 px-4 py-2 rounded-2xl text-stone-700 mt-2 overflow-auto max-h-24">
+                    <p className="text-sm border border-stone-200 bg-stone-100 px-4 py-2 rounded-2xl text-stone-700 mt-2 overflow-auto max-h-24">
                         {book.comment}
                     </p>
                 )}
