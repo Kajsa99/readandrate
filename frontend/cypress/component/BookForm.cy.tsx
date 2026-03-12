@@ -25,7 +25,7 @@ describe("Bookform Component", () => {
         cy.get('input[placeholder="Enter author\'s name"]').should("exist");
         cy.get('textarea[placeholder*="additional comments"]').should("exist");
         cy.get("select").should("have.length", 1);
-        cy.get("button").contains("Add Review").should("exist");
+        cy.get("button").contains("Publish review").should("exist");
     });
 
     it("should fill form and submit successfully", () => {
@@ -36,7 +36,7 @@ describe("Bookform Component", () => {
         );
         cy.contains("label", "Rating:").parent().find("span").eq(4).click();
         cy.get("select").select("Svenne");
-        cy.get("button").contains("Add Review").click();
+        cy.get("button").contains("Publish review").click();
 
         cy.wait("@addBook").its("response.statusCode").should("eq", 201);
     });

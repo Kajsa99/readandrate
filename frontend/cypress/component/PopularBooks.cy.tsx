@@ -1,4 +1,4 @@
-import PopularBooks from "../../src/components/PopularBooks";
+import PopularBooks from "../../src/pages/popular";
 
 // TDD for Popular books filter, now works as filter by rating component
 describe("PopularBooks Component", () => {
@@ -62,18 +62,25 @@ describe("PopularBooks Component", () => {
         }).as("getBooks");
     });
 
-    it("renders a list of books with rating >= 4", () => {
+    it("renders a list of books all books (default)", () => {
         cy.mount(<PopularBooks />);
         cy.wait("@getBooks");
 
-        // Should display only 3 books with rating 5 and 4 from mock data
-        cy.get('[data-testid="book-item"]').should("have.length", 3);
+        // Should display all 6 books from mock data
+        cy.get('[data-testid="book-item"]').should("have.length", 6);
     });
 
-    it("displays only Very Good (4) and Excellent (5) rated books", () => {
+    it("filters to Popular when selected (rating >= 4)", () => {
         cy.mount(<PopularBooks />);
         cy.wait("@getBooks");
 
+        cy.get('[data-testid="filter-select"]').select("Popular");
+
+        cy.get('[data-testid="book-item"]').should("have.length", 3);
+        cy.contains("The Great Gatsby").should("exist");
+        cy.contains("To Kill a Mockingbird").should("exist");
+        cy.contains("1984").should("exist");
+        cy.contains("Pride and Prejudice").should("not.exist");
         // Check each book's highlighted stars match the rating
         cy.get('[data-testid="book-item"]')
             .eq(0)
@@ -90,17 +97,6 @@ describe("PopularBooks Component", () => {
             .within(() => {
                 cy.get("span.text-amber-400").should("have.length", 4);
             });
-    });
-
-    it("filters to Popular by default (rating >= 4)", () => {
-        cy.mount(<PopularBooks />);
-        cy.wait("@getBooks");
-
-        cy.get('[data-testid="book-item"]').should("have.length", 3);
-        cy.contains("The Great Gatsby").should("exist");
-        cy.contains("To Kill a Mockingbird").should("exist");
-        cy.contains("1984").should("exist");
-        cy.contains("Pride and Prejudice").should("not.exist");
     });
 
     it("filters to Average when selected (rating = 3)", () => {
